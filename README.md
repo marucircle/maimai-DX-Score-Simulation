@@ -31,14 +31,29 @@
 
 - BREAK
 
-
 |   Critical Perfect　|  Perfect (High)  |  Perfect (Low)  |  Great  |  Good  |  miss  |
 | ---- | ---- | ---- | ---- | ---- | ---- |
 | 5 | 5 | 5 | 4 | 2 | 0 |
 
 ### BREAKボーナス
 
+- 旧筐体
+
+|   Critical Perfect　|  Perfect (High)  |  Perfect (Low)  |  Great  |  Good  |  miss  |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| 100 | 50 | 0 | 0 | 0 | 0 |
+
+- 新筐体
+
+|   Critical Perfect　|  Perfect (High)  |  Perfect (Low)  |  Great  |  Good  |  miss  |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| 1 | 0.75 | 0.5 | 0.4 | 0.3 | 0 |
 
 ### 計算方法
-基本点　＝　評価値合計 / 各ノーツの評点合計
+- 旧筐体
+基本点　＝　スコア合計 / 該当楽曲の配点合計
+達成率　＝　(スコア合計 + BREAKボーナスの合計) / スコア合計 * 100%
 
+- 新筐体
+基本点　＝　各ノーツの評点合計 / 該当楽曲の評価値合計
+達成率　＝　基本点 + BREAKボーナスの合計 * 100%
