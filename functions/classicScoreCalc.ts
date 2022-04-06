@@ -1,0 +1,89 @@
+import { Tap, Hold, Slide, Touch, Break } from '../constants/classicScore';
+
+interface ScorePointDetail {
+  evaluation: keyof typeof Tap & keyof typeof Break;
+  sum: number;
+  point: number;
+}
+
+interface ScorePoint {
+  notesName: string;
+  total: number;
+  detail: ScorePointDetail[];
+}
+
+//全ノーツの最高点の合計
+export const maxScoreCalc = (scorePoint: ScorePoint) => {
+  switch (scorePoint.notesName) {
+    case 'tap': {
+      return Tap['criticalPerfect'] * scorePoint.total;
+    }
+    case 'hold': {
+      return Hold['criticalPerfect'] * scorePoint.total;
+    }
+    case 'slide': {
+      return Slide['criticalPerfect'] * scorePoint.total;
+    }
+    case 'touch': {
+      return Touch['criticalPerfect'] * scorePoint.total;
+    }
+    case 'break': {
+      return Break['criticalPerfect'] * scorePoint.total;
+    }
+    default: {
+      alert('スコアに異常がある可能性があります。');
+      return 0;
+    }
+  }
+};
+
+//該当ノーツの各判定ごとの合計点
+export const detailScoreCalc = (scoreDetail: ScorePointDetail, notesName: string) => {
+  switch (notesName) {
+    case 'tap': {
+      return Tap[scoreDetail.evaluation] * scoreDetail.sum * scoreDetail.point;
+    }
+    case 'hold': {
+      return Hold[scoreDetail.evaluation] * scoreDetail.sum * scoreDetail.point;
+    }
+    case 'slide': {
+      return Slide[scoreDetail.evaluation] * scoreDetail.sum * scoreDetail.point;
+    }
+    case 'touch': {
+      return Touch[scoreDetail.evaluation] * scoreDetail.sum * scoreDetail.point;
+    }
+    case 'break': {
+      return Break[scoreDetail.evaluation] * scoreDetail.sum * scoreDetail.point;
+    }
+    default: {
+      console.error('スコアに異常がある可能性があります。');
+      return 0;
+    }
+  }
+};
+
+//各ノーツの合計獲得点
+export const totalScoreCalc = (scorePoint: ScorePoint) => {
+  return scorePoint.detail.reduce(
+    (previousScore: number, currentDetail: ScorePointDetail) =>
+      previousScore + detailScoreCalc(currentDetail, scorePoint.notesName),
+    0
+  );
+};
+
+export const classicScoreCalc = (scorePoints: ScorePoint[]) => {
+  let maxScore = scorePoints.reduce(
+    (previousPoint: number, currentPoint: ScorePoint) => previousPoint + maxScoreCalc(currentPoint),
+    0
+  );
+
+  let totalScore = scorePoints.reduce(
+    (previousPoint: number, currentPoint: ScorePoint) =>
+      previousPoint + totalScoreCalc(currentPoint),
+    0
+  );
+  if (maxScore === 0) {
+    return 0;
+  }
+  return totalScore / maxScore;
+};
