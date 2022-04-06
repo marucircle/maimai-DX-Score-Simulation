@@ -1,12 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const Test = styled.div`
-  background-color: #ff0000;
-`;
+import { Header } from '../components/Header';
 
 const Home = () => {
-  return <Test>indexページ</Test>;
+  return (
+    <div>
+      <Header></Header>
+    </div>
+  );
 };
 
 export default Home;
