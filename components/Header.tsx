@@ -1,11 +1,17 @@
+import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { fontSize } from '../constants/font';
 
 export type HeaderProps = {
-  text?: string;
+  children?: ReactNode;
 };
 
-const StyledHeader = styled.header``;
+const StyledHeader = styled.header`
+  font-size: ${fontSize['large']};
+  text-align: center;
+  padding: 20px 0;
+`;
 
-export const Header = ({ text }: HeaderProps) => {
-  return <StyledHeader>{text}</StyledHeader>;
+export const Header = ({ children }: HeaderProps) => {
+  return <StyledHeader>{children}</StyledHeader>;
 };

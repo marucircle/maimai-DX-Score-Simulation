@@ -12,5 +12,5 @@ const Template: Story<HeaderProps> = (args) => <HeaderComponent {...args} />;
 
 export const Header = Template.bind({});
 Header.args = {
-  text: 'Header Text',
+  children: 'Header Text',
 };
