@@ -1,4 +1,3 @@
-
 ---
 to: stories/<%= name %>.stories.tsx
 unless_exists: true
