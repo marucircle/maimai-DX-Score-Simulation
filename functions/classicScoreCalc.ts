@@ -1,15 +1,14 @@
 import { Tap, Hold, Slide, Touch, Break } from '../constants/classicScore';
 
 interface ScorePointDetail {
-  evaluation: keyof typeof Tap & keyof typeof Break;
-  sum: number;
-  point: number;
+  evaluation: keyof typeof Tap & keyof typeof Break; //判定名
+  sum: number; //その判定を獲得したノーツ数
 }
 
 interface ScorePoint {
-  notesName: string;
-  total: number;
-  detail: ScorePointDetail[];
+  notesName: string; //ノーツ名
+  total: number; //そのノーツの総数
+  detail: ScorePointDetail[]; //判定の獲得数詳細
 }
 
 //全ノーツの最高点の合計
@@ -41,19 +40,19 @@ export const maxScoreCalc = (scorePoint: ScorePoint) => {
 export const detailScoreCalc = (scoreDetail: ScorePointDetail, notesName: string) => {
   switch (notesName) {
     case 'tap': {
-      return Tap[scoreDetail.evaluation] * scoreDetail.sum * scoreDetail.point;
+      return Tap[scoreDetail.evaluation] * scoreDetail.sum;
     }
     case 'hold': {
-      return Hold[scoreDetail.evaluation] * scoreDetail.sum * scoreDetail.point;
+      return Hold[scoreDetail.evaluation] * scoreDetail.sum;
     }
     case 'slide': {
-      return Slide[scoreDetail.evaluation] * scoreDetail.sum * scoreDetail.point;
+      return Slide[scoreDetail.evaluation] * scoreDetail.sum;
     }
     case 'touch': {
-      return Touch[scoreDetail.evaluation] * scoreDetail.sum * scoreDetail.point;
+      return Touch[scoreDetail.evaluation] * scoreDetail.sum;
     }
     case 'break': {
-      return Break[scoreDetail.evaluation] * scoreDetail.sum * scoreDetail.point;
+      return Break[scoreDetail.evaluation] * scoreDetail.sum;
     }
     default: {
       console.error('スコアに異常がある可能性があります。');
@@ -85,5 +84,8 @@ export const classicScoreCalc = (scorePoints: ScorePoint[]) => {
   if (maxScore === 0) {
     return 0;
   }
-  return totalScore / maxScore;
+  return {
+    max: maxScore,
+    total: totalScore,
+  };
 };
