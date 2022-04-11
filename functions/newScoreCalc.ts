@@ -27,10 +27,7 @@ export const maxScoreCalc = (scorePoint: ScorePoint) => {
       return Touch['criticalPerfect'] * scorePoint.total;
     }
     case 'break': {
-      return (
-        Break['criticalPerfect'] * scorePoint.total +
-        BreakBonus['criticalPerfect'] * scorePoint.total
-      );
+      return Break['criticalPerfect'] * scorePoint.total;
     }
     default: {
       alert('スコアに異常がある可能性があります。');
@@ -76,6 +73,18 @@ export const totalScoreCalc = (scorePoint: ScorePoint) => {
   );
 };
 
+export const totalBreakBonusCalc = (scorePoint: ScorePoint) => {
+  return scorePoint.detail.reduce(
+    (previousScore: number, currentDetail: ScorePointDetail) =>
+      previousScore + BreakBonus[currentDetail.evaluation] * currentDetail.sum,
+    0
+  );
+};
+
+export const maxBreakBonusCalc = (scorePoint: ScorePoint) => {
+  return BreakBonus['criticalPerfect'] * scorePoint.total;
+};
+
 export const newScoreCalc = (scorePoints: ScorePoint[]) => {
   let maxScore = scorePoints.reduce(
     (previousPoint: number, currentPoint: ScorePoint) => previousPoint + maxScoreCalc(currentPoint),
@@ -87,11 +96,30 @@ export const newScoreCalc = (scorePoints: ScorePoint[]) => {
       previousPoint + totalScoreCalc(currentPoint),
     0
   );
+
+  let totalBreakBonus = scorePoints.reduce((previousPoint: number, currentPoint: ScorePoint) => {
+    if (currentPoint.notesName === 'break') {
+      return previousPoint + totalBreakBonusCalc(currentPoint);
+    } else {
+      return previousPoint;
+    }
+  }, 0);
+
+  let maxBreakBonus = scorePoints.reduce((previousPoint: number, currentPoint: ScorePoint) => {
+    if (currentPoint.notesName === 'break') {
+      return previousPoint + maxBreakBonusCalc(currentPoint);
+    } else {
+      return previousPoint;
+    }
+  }, 0);
+
   if (maxScore === 0) {
-    return 0;
+    return { max: 0, total: 0, maxBreakBonus: 0, totalBreakBonus: 0 };
   }
   return {
     max: maxScore,
     total: totalScore,
+    maxBreakBonus: maxBreakBonus,
+    totalBreakBonus: totalBreakBonus,
   };
 };
