@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import { evaluationColor } from '../constants/color';
+import { NotesType, ScoreDataType } from '../types/score';
 
 export type TableProps = {
-  purpose?: string;
+  onChange: (value: number, notesType: String, evaluation: String) => void;
+  scoreData: ScoreDataType;
 };
 
-type evaluation = keyof typeof evaluationColor;
-
 const StyledTable = styled.table`
-  width: 300px;
+  width: 80%;
   border: 2px solid #3e9cf5;
   border-radius: 5px;
   border-collapse: separate;
@@ -34,7 +34,7 @@ const TableRow = styled.tr<{ notesType?: String }>`
 
 const TableData = styled.td<{ evaluation: keyof typeof evaluationColor; cellType: String }>`
   text-align: ${({ cellType }) => (cellType === 'evaluationName' ? 'center' : 'right')};
-  padding: 4px 5px;
+  padding: 8px 2px;
   border: 1px solid #c0e5f7;
   display: table-cell;
   text-transform: uppercase;
@@ -43,9 +43,43 @@ const TableData = styled.td<{ evaluation: keyof typeof evaluationColor; cellType
   font-weight: ${({ cellType }) => (cellType === 'evaluationName' ? 'bold' : '')};
 `;
 
-const TableBreakBonus = styled.div`
-  padding: 4px 0px;
+const TableNumInput = styled.input`
+  padding: 0;
+  border: none;
+  width: 100%;
+  border-radius: 0;
+  outline: none;
   text-align: right;
+  font-size: inherit;
+  color: inherit;
+  background: inherit;
+`;
+
+const TableInputLabel = styled.span`
+  text-align: left;
+`;
+
+const TableBreakBonus = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &:not(:last-child) {
+    position: relative;
+    padding-bottom: 8px;
+    &::before {
+      content: '';
+      position: absolute;
+      left: -2%;
+      top: 100%;
+      width: 104%;
+      height: 1px;
+      background-color: #c0e5f7;
+    }
+  }
+  &:last-child {
+    padding-top: 8px;
+  }
 `;
 
 const TableHeader = styled.th`
@@ -53,24 +87,28 @@ const TableHeader = styled.th`
   vertical-align: inherit;
   font-weight: bold;
   text-align: -internal-center;
-  padding: 4px 5px;
+  padding: 8px 5px;
   border: 1px solid #c0e5f7;
   text-transform: uppercase;
   color: #4762b1;
 `;
 
-export const Table = ({ purpose }: TableProps) => {
-  const notesTypes = ['tap', 'hold', 'slide', 'touch', 'break'];
+export const Table = ({ onChange, scoreData }: TableProps) => {
+  const notesTypes: NotesType[] = ['tap', 'hold', 'slide', 'touch', 'break'];
   const evaluations: evaluation[] = ['criticalPerfect', 'perfect', 'great', 'good', 'miss'];
 
   return (
     <StyledTable>
       <TableBody>
-        <TableRow>
+        <TableRow key="evaluationName">
           <TableHeader></TableHeader>
           {evaluations.map((evaluation) => {
             return (
-              <TableData evaluation={evaluation} cellType="evaluationName">
+              <TableData
+                key={'header-' + evaluation}
+                evaluation={evaluation}
+                cellType="evaluationName"
+              >
                 {evaluation === 'criticalPerfect' ? (
                   <div>
                     critical
@@ -86,31 +124,65 @@ export const Table = ({ purpose }: TableProps) => {
         </TableRow>
         {notesTypes.map((notesType) => {
           return notesType !== 'break' ? (
-            <TableRow notesType={notesType}>
+            <TableRow notesType={notesType} key={notesType}>
               <TableHeader>{notesType}</TableHeader>
               {evaluations.map((evaluation) => {
                 return (
-                  <TableData evaluation={evaluation} cellType="evaluationData">
-                    11
+                  <TableData
+                    key={notesType + '-' + evaluation}
+                    evaluation={evaluation}
+                    cellType="evaluationData"
+                  >
+                    <TableNumInput
+                      value={scoreData[notesType].detail[evaluation]}
+                      onChange={(e) => onChange(Number(e.target.value), notesType, evaluation)}
+                    ></TableNumInput>
                   </TableData>
                 );
               })}
             </TableRow>
           ) : (
-            <TableRow notesType={notesType}>
+            <TableRow notesType={notesType} key={notesType}>
               <TableHeader>{notesType}</TableHeader>
               {evaluations.map((evaluation) => {
                 if (evaluation !== 'perfect') {
                   return (
-                    <TableData evaluation={evaluation} cellType="evaluationData">
-                      11
+                    <TableData
+                      key={notesType + '-' + evaluation}
+                      evaluation={evaluation}
+                      cellType="evaluationData"
+                    >
+                      <TableNumInput
+                        value={scoreData[notesType].detail[evaluation]}
+                        onChange={(e) => onChange(Number(e.target.value), notesType, evaluation)}
+                      />
                     </TableData>
                   );
                 } else {
                   return (
-                    <TableData evaluation={'perfect'} cellType="evaluationData">
-                      <TableBreakBonus>High:11</TableBreakBonus>
-                      <TableBreakBonus>Low:11</TableBreakBonus>
+                    <TableData
+                      key={notesType + '-' + evaluation}
+                      evaluation={'perfect'}
+                      cellType="evaluationData"
+                    >
+                      <TableBreakBonus>
+                        <TableInputLabel>High</TableInputLabel>
+                        <TableNumInput
+                          value={scoreData[notesType].detail['highPerfect']}
+                          onChange={(e) =>
+                            onChange(Number(e.target.value), notesType, 'highPerfect')
+                          }
+                        />
+                      </TableBreakBonus>
+                      <TableBreakBonus>
+                        <TableInputLabel>Low</TableInputLabel>
+                        <TableNumInput
+                          value={scoreData[notesType].detail['lowPerfect']}
+                          onChange={(e) =>
+                            onChange(Number(e.target.value), notesType, 'lowPerfect')
+                          }
+                        />
+                      </TableBreakBonus>
                     </TableData>
                   );
                 }
