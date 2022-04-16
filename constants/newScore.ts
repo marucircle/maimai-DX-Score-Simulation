@@ -32,7 +32,7 @@ export const Touch = {
 
 export const Break = {
   criticalPerfect: 5,
-  HighPerfect: 5,
+  highPerfect: 5,
   rowPerfect: 5,
   great: 4,
   good: 2,
@@ -41,7 +41,7 @@ export const Break = {
 
 export const BreakBonus = {
   criticalPerfect: 1,
-  HighPerfect: 0.75,
+  highPerfect: 0.75,
   rowPerfect: 0.5,
   great: 0.4,
   good: 0.3,
