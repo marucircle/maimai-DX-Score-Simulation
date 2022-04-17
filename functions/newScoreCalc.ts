@@ -1,7 +1,7 @@
 import { Tap, Hold, Slide, Touch, Break, BreakBonus } from '../constants/newScore';
 
 interface ScorePointDetail {
-  evaluation: keyof typeof Tap & keyof typeof Break; //判定名
+  evaluation: string; //判定名
   sum: number; //その判定を獲得したノーツ数
 }
 
@@ -52,10 +52,7 @@ export const detailScoreCalc = (scoreDetail: ScorePointDetail, notesName: string
       return Touch[scoreDetail.evaluation] * scoreDetail.sum;
     }
     case 'break': {
-      return (
-        Break[scoreDetail.evaluation] * scoreDetail.sum +
-        BreakBonus[scoreDetail.evaluation] * scoreDetail.sum
-      );
+      return Break[scoreDetail.evaluation] * scoreDetail.sum;
     }
     default: {
       console.error('スコアに異常がある可能性があります。');
@@ -113,9 +110,6 @@ export const newScoreCalc = (scorePoints: ScorePoint[]) => {
     }
   }, 0);
 
-  if (maxScore === 0) {
-    return { max: 0, total: 0, maxBreakBonus: 0, totalBreakBonus: 0 };
-  }
   return {
     max: maxScore,
     total: totalScore,
