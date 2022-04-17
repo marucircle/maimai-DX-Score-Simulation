@@ -1,4 +1,5 @@
 import { evaluationColor } from '../constants/color';
+import { evaluations } from '../constants/notes';
 
 export type Evaluation =
   | 'criticalPerfect'
@@ -10,7 +11,7 @@ export type Evaluation =
   | 'miss';
 
 export type EvaluationDetailType = {
-  [key in keyof typeof evaluationColor]?: number;
+  [key in Evaluation]: number;
 };
 
 export type NotesDetailType = {

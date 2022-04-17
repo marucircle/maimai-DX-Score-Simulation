@@ -1,14 +1,17 @@
 import styled from 'styled-components';
 import { evaluationColor } from '../constants/color';
-import { NotesType, ScoreDataType } from '../types/score';
+import { evaluations, notesTypes } from '../constants/notes';
+import { Evaluation, NotesType, ScoreDataType } from '../types/score';
 
 export type TableProps = {
-  onChange: (value: number, notesType: String, evaluation: String) => void;
+  onChange: (value: string, notesType: NotesType, evaluation: Evaluation) => void;
   scoreData: ScoreDataType;
 };
 
 const StyledTable = styled.table`
-  width: 80%;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
   border: 2px solid #3e9cf5;
   border-radius: 5px;
   border-collapse: separate;
@@ -45,6 +48,7 @@ const TableData = styled.td<{ evaluation: keyof typeof evaluationColor; cellType
 
 const TableNumInput = styled.input`
   padding: 0;
+  margin: 0;
   border: none;
   width: 100%;
   border-radius: 0;
@@ -94,9 +98,6 @@ const TableHeader = styled.th`
 `;
 
 export const Table = ({ onChange, scoreData }: TableProps) => {
-  const notesTypes: NotesType[] = ['tap', 'hold', 'slide', 'touch', 'break'];
-  const evaluations: evaluation[] = ['criticalPerfect', 'perfect', 'great', 'good', 'miss'];
-
   return (
     <StyledTable>
       <TableBody>
@@ -135,7 +136,10 @@ export const Table = ({ onChange, scoreData }: TableProps) => {
                   >
                     <TableNumInput
                       value={scoreData[notesType].detail[evaluation]}
-                      onChange={(e) => onChange(Number(e.target.value), notesType, evaluation)}
+                      type="text"
+                      onChange={(e) => {
+                        onChange(e.target.value, notesType, evaluation);
+                      }}
                     ></TableNumInput>
                   </TableData>
                 );
@@ -153,8 +157,9 @@ export const Table = ({ onChange, scoreData }: TableProps) => {
                       cellType="evaluationData"
                     >
                       <TableNumInput
+                        type="text"
                         value={scoreData[notesType].detail[evaluation]}
-                        onChange={(e) => onChange(Number(e.target.value), notesType, evaluation)}
+                        onChange={(e) => onChange(e.target.value, notesType, evaluation)}
                       />
                     </TableData>
                   );
@@ -169,18 +174,16 @@ export const Table = ({ onChange, scoreData }: TableProps) => {
                         <TableInputLabel>High</TableInputLabel>
                         <TableNumInput
                           value={scoreData[notesType].detail['highPerfect']}
-                          onChange={(e) =>
-                            onChange(Number(e.target.value), notesType, 'highPerfect')
-                          }
+                          type="text"
+                          onChange={(e) => onChange(e.target.value, notesType, 'highPerfect')}
                         />
                       </TableBreakBonus>
                       <TableBreakBonus>
                         <TableInputLabel>Low</TableInputLabel>
                         <TableNumInput
                           value={scoreData[notesType].detail['lowPerfect']}
-                          onChange={(e) =>
-                            onChange(Number(e.target.value), notesType, 'lowPerfect')
-                          }
+                          type="text"
+                          onChange={(e) => onChange(e.target.value, notesType, 'lowPerfect')}
                         />
                       </TableBreakBonus>
                     </TableData>
