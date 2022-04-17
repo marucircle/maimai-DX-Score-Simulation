@@ -7,3 +7,8 @@ export const evaluationColor = {
   good: '#2fca4c',
   miss: '#8c8c8c',
 } as const;
+
+export const ClassicScoreColor = {
+  text: '#ffbc09',
+  shadow: '#ff9d00',
+};
