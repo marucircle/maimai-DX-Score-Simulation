@@ -1,7 +1,8 @@
 import { Tap, Hold, Slide, Touch, Break, BreakBonus } from '../constants/classicScore';
+import { Evaluation } from '../types/score';
 
 interface ScorePointDetail {
-  evaluation: keyof typeof Tap & keyof typeof Break; //判定名
+  evaluation: string; //判定名
   sum: number; //その判定を獲得したノーツ数
 }
 
@@ -110,9 +111,6 @@ export const classicScoreCalc = (scorePoints: ScorePoint[]) => {
     }
   }, 0);
 
-  if (maxScore === 0) {
-    return 0;
-  }
   return {
     max: maxScore,
     total: totalScore,

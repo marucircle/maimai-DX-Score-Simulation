@@ -2,7 +2,7 @@ import { Tap, Break } from '../constants/classicScore';
 import { DXScore } from '../constants/DXScore';
 
 interface ScorePointDetail {
-  evaluation: keyof typeof Tap & keyof typeof Break; //判定名
+  evaluation: string; //判定名
   sum: number; //その判定を獲得したノーツ数
 }
 
