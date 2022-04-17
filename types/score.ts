@@ -1,6 +1,3 @@
-import { evaluationColor } from '../constants/color';
-import { evaluations } from '../constants/notes';
-
 export type Evaluation =
   | 'criticalPerfect'
   | 'highPerfect'
