@@ -1,4 +1,3 @@
-import { Tap, Break } from '../constants/classicScore';
 import { DXScore } from '../constants/DXScore';
 
 interface ScorePointDetail {

@@ -1,4 +1,4 @@
-import { Evaluation, EvaluationDetailType } from '../types/score';
+import { EvaluationDetailType } from '../types/score';
 
 export const Tap: EvaluationDetailType = {
   criticalPerfect: 500,

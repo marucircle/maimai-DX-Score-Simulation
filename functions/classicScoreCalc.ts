@@ -1,5 +1,4 @@
 import { Tap, Hold, Slide, Touch, Break, BreakBonus } from '../constants/classicScore';
-import { Evaluation } from '../types/score';
 
 interface ScorePointDetail {
   evaluation: string; //判定名

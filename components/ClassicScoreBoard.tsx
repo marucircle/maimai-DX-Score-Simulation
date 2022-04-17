@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ClassicScoreColor, evaluationColor } from '../constants/color';
+import { ClassicScoreColor } from '../constants/color';
 
 export type ClassicScoreBoardProps = {
   scoreData: {

@@ -1,4 +1,3 @@
-import { data } from 'msw/lib/types/context';
 import { useEffect, useState } from 'react';
 import { classicScoreCalc } from '../functions/classicScoreCalc';
 import { Evaluation, NotesType, ScoreDataType } from '../types/score';
