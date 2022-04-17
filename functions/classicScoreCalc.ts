@@ -1,4 +1,4 @@
-import { Tap, Hold, Slide, Touch, Break } from '../constants/classicScore';
+import { Tap, Hold, Slide, Touch, Break, BreakBonus } from '../constants/classicScore';
 
 interface ScorePointDetail {
   evaluation: keyof typeof Tap & keyof typeof Break; //判定名
@@ -27,7 +27,7 @@ export const maxScoreCalc = (scorePoint: ScorePoint) => {
       return Touch['criticalPerfect'] * scorePoint.total;
     }
     case 'break': {
-      return Break['criticalPerfect'] * scorePoint.total;
+      return Break['lowPerfect'] * scorePoint.total;
     }
     default: {
       alert('スコアに異常がある可能性があります。');
@@ -61,6 +61,18 @@ export const detailScoreCalc = (scoreDetail: ScorePointDetail, notesName: string
   }
 };
 
+export const totalBreakBonusCalc = (scorePoint: ScorePoint) => {
+  return scorePoint.detail.reduce(
+    (previousScore: number, currentDetail: ScorePointDetail) =>
+      previousScore + BreakBonus[currentDetail.evaluation] * currentDetail.sum,
+    0
+  );
+};
+
+export const maxBreakBonusCalc = (scorePoint: ScorePoint) => {
+  return BreakBonus['criticalPerfect'] * scorePoint.total;
+};
+
 //各ノーツの合計獲得点
 export const totalScoreCalc = (scorePoint: ScorePoint) => {
   return scorePoint.detail.reduce(
@@ -81,11 +93,30 @@ export const classicScoreCalc = (scorePoints: ScorePoint[]) => {
       previousPoint + totalScoreCalc(currentPoint),
     0
   );
+
+  let totalBreakBonus = scorePoints.reduce((previousPoint: number, currentPoint: ScorePoint) => {
+    if (currentPoint.notesName === 'break') {
+      return previousPoint + totalBreakBonusCalc(currentPoint);
+    } else {
+      return previousPoint;
+    }
+  }, 0);
+
+  let maxBreakBonus = scorePoints.reduce((previousPoint: number, currentPoint: ScorePoint) => {
+    if (currentPoint.notesName === 'break') {
+      return previousPoint + maxBreakBonusCalc(currentPoint);
+    } else {
+      return previousPoint;
+    }
+  }, 0);
+
   if (maxScore === 0) {
     return 0;
   }
   return {
     max: maxScore,
     total: totalScore,
+    maxBreakBonus: maxBreakBonus,
+    totalBreakBonus: totalBreakBonus,
   };
 };
