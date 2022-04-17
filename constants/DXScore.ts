@@ -1,4 +1,6 @@
-export const DXScore = {
+import { EvaluationDetailType } from '../types/score';
+
+export const DXScore: EvaluationDetailType = {
   criticalPerfect: 3,
   highPerfect: 2,
   lowPerfect: 2,
