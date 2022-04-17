@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { classicScoreCalc } from '../functions/classicScoreCalc';
+import { newScoreCalc } from '../functions/newScoreCalc';
 import { Evaluation, NotesType, ScoreDataType } from '../types/score';
 
 export const useScore = () => {
@@ -103,7 +104,8 @@ export const useScore = () => {
       };
     });
     setClassicScore(Object.assign({}, classicScoreCalc(calcData)));
-  }, [editScoreData]);
+    setNewScore(Object.assign({}, newScoreCalc(calcData)));
+  }, [scoreData]);
 
   return {
     classicScore,
