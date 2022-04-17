@@ -11,7 +11,7 @@ export type Evaluation =
   | 'miss';
 
 export type EvaluationDetailType = {
-  [key in Evaluation]: number;
+  [key in string]: number;
 };
 
 export type NotesDetailType = {
