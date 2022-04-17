@@ -2,10 +2,12 @@ import styled from 'styled-components';
 import { ClassicScoreColor, evaluationColor } from '../constants/color';
 
 export type ClassicScoreBoardProps = {
-  total: number;
-  max: number;
-  totalBreakBonus: number;
-  maxBreakBonus: number;
+  scoreData: {
+    total: number;
+    max: number;
+    totalBreakBonus: number;
+    maxBreakBonus: number;
+  };
 };
 
 const StyledClassicScoreBoard = styled.div`
@@ -57,24 +59,19 @@ const TotalScore = styled.div``;
 
 const BreakBonus = styled.div``;
 
-export const ClassicScoreBoard = ({
-  total,
-  max,
-  totalBreakBonus,
-  maxBreakBonus,
-}: ClassicScoreBoardProps) => {
+export const ClassicScoreBoard = ({ scoreData }: ClassicScoreBoardProps) => {
   return (
     <StyledClassicScoreBoard>
       <BoardTitle>旧筐体 達成率</BoardTitle>
       <Achievement>
-        {Math.ceil((total / max) * 100 * Math.pow(10, 2)) / Math.pow(10, 2)}
+        {Math.round((scoreData.total / scoreData.max) * 100 * Math.pow(10, 2)) / Math.pow(10, 2)}
         <AchievementPercent>%</AchievementPercent>
       </Achievement>
       <ScoreDetail>
-        <MaxScore>Maxスコア: {max + maxBreakBonus}</MaxScore>
-        <TotalScore>Totalスコア: {total}</TotalScore>
+        <MaxScore>Maxスコア: {scoreData.max + scoreData.maxBreakBonus}</MaxScore>
+        <TotalScore>Totalスコア: {scoreData.total}</TotalScore>
         <BreakBonus>
-          Breakボーナス: {totalBreakBonus} / {maxBreakBonus}
+          Breakボーナス: {scoreData.totalBreakBonus} / {scoreData.maxBreakBonus}
         </BreakBonus>
       </ScoreDetail>
     </StyledClassicScoreBoard>

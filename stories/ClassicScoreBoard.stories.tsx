@@ -15,8 +15,10 @@ const Template: Story<ClassicScoreBoardProps> = (args) => <ClassicScoreBoardComp
 
 export const ClassicScoreBoard = Template.bind({});
 ClassicScoreBoard.args = {
-  max: 490000,
-  total: 495400,
-  maxBreakBonus: 10000,
-  totalBreakBonus: 9400,
+  scoreData: {
+    max: 490000,
+    total: 495400,
+    maxBreakBonus: 10000,
+    totalBreakBonus: 9400,
+  },
 };
