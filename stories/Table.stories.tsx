@@ -17,6 +17,8 @@ Table.args = {
       total: 0,
       detail: {
         criticalPerfect: 0,
+        highPerfect: -1,
+        lowPerfect: -1,
         perfect: 0,
         great: 0,
         good: 0,
@@ -27,6 +29,8 @@ Table.args = {
       total: 0,
       detail: {
         criticalPerfect: 0,
+        highPerfect: -1,
+        lowPerfect: -1,
         perfect: 0,
         great: 0,
         good: 0,
@@ -37,6 +41,8 @@ Table.args = {
       total: 0,
       detail: {
         criticalPerfect: 0,
+        highPerfect: -1,
+        lowPerfect: -1,
         perfect: 0,
         great: 0,
         good: 0,
@@ -47,6 +53,8 @@ Table.args = {
       total: 0,
       detail: {
         criticalPerfect: 0,
+        highPerfect: -1,
+        lowPerfect: -1,
         perfect: 0,
         great: 0,
         good: 0,
@@ -59,6 +67,7 @@ Table.args = {
         criticalPerfect: 0,
         highPerfect: 0,
         lowPerfect: 0,
+        perfect: -1,
         great: 0,
         good: 0,
         miss: 0,
