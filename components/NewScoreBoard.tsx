@@ -19,6 +19,7 @@ const StyledClassicScoreBoard = styled.div`
   border-spacing: 0;
   padding: 10px 10px;
   background-color: #606fb348;
+  width: 100%;
 `;
 
 const BoardTitle = styled.div`

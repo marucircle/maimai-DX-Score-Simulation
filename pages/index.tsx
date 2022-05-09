@@ -12,7 +12,19 @@ const TableWrapper = styled.div`
 
 const ScoreBoards = styled.div`
   display: flex;
-  flex-direction: column;
+  margin: 40px auto;
+  @media screen and (min-width: 1400px) {
+    width: 90%;
+    flex-direction: row;
+    column-gap: 30px;
+    justify-content: center;
+  }
+  @media screen and (max-width: 1399px) {
+    width: 80%;
+    flex-direction: column;
+    row-gap: 30px;
+    align-items: center;
+  }
 `;
 
 const Home = () => {

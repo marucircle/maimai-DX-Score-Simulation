@@ -10,6 +10,8 @@ const StyledHeader = styled.header`
   font-size: ${fontSize['large']};
   text-align: center;
   padding: 20px 0;
+  font-family: Noto Sans Noto Sans JP;
+  font-weight: bold;
 `;
 
 export const Header = ({ children }: HeaderProps) => {
