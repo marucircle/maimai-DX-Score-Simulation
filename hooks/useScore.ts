@@ -82,6 +82,16 @@ export const useScore = () => {
 
   const editScoreData = (value: string, notesType: NotesType, evaluation: Evaluation) => {
     const re = /^[0-9\b]+$/;
+    if (value === '') {
+      setScoreData((updateData) => {
+        if (updateData[notesType].detail[evaluation] === -1) return updateData;
+
+        updateData[notesType].total += -updateData[notesType].detail[evaluation];
+        updateData[notesType].detail[evaluation] = 0;
+        // console.log(updateData);
+        return Object.assign({}, updateData); //あんまり良くないらしい　次回以降気を付けよう
+      });
+    }
     if (re.test(value) && Number(value) <= 100000 && Number(value) >= 0)
       setScoreData((updateData) => {
         if (updateData[notesType].detail[evaluation] === -1) return updateData;
