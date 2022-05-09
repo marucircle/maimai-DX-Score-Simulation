@@ -31,7 +31,10 @@ const Home = () => {
   const { scoreData, editScoreData, classicScore, newScore } = useScore();
   return (
     <div>
-      <Header>maimaiでらっくす　すこあしみゅれーたー</Header>
+      <Header>
+        <span>maimaiでらっくす</span>
+        <span>すこあしみゅれーたー</span>
+      </Header>
       <ScoreBoards>
         <ClassicScoreBoard scoreData={classicScore} />
         <NewScoreBoard scoreData={newScore} />
