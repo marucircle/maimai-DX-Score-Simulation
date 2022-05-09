@@ -49,16 +49,16 @@ const AchievementPercent = styled.span`
   font-size: 60%;
 `;
 
-const ScoreDetail = styled.div`
-  margin-top: 10px;
-  font-size: 20px;
-`;
+// const ScoreDetail = styled.div`
+//   margin-top: 10px;
+//   font-size: 20px;
+// `;
 
-const MaxScore = styled.div``;
+// const MaxScore = styled.div``;
 
-const TotalScore = styled.div``;
+// const TotalScore = styled.div``;
 
-const BreakBonus = styled.div``;
+// const BreakBonus = styled.div``;
 
 export const NewScoreBoard = ({ scoreData }: NewScoreBoardProps) => {
   return (
