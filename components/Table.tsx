@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { evaluationColor } from '../constants/color';
+import { mediaQuery } from '../constants/mediaQuery';
 import { evaluations, notesTypes } from '../constants/notes';
 import { Evaluation, NotesType, ScoreDataType } from '../types/score';
 
@@ -53,14 +54,23 @@ const TableNumInput = styled.input`
   width: 100%;
   border-radius: 0;
   outline: none;
-  text-align: right;
+  text-align: left;
   font-size: inherit;
   color: inherit;
   background: inherit;
+  @media screen and (min-width:${mediaQuery['tb'].min}){
+  padding: 3px 5px;
+  }
+  @media screen and (max-width:${mediaQuery['sp'].max}){
+    padding 6px 0;
+  }
 `;
 
 const TableInputLabel = styled.span`
   text-align: left;
+  @media screen and (max-width: ${mediaQuery['sp'].max}) {
+    display: none;
+  }
 `;
 
 const TableBreakBonus = styled.div`
@@ -171,20 +181,20 @@ export const Table = ({ onChange, scoreData }: TableProps) => {
                       cellType="evaluationData"
                     >
                       <TableBreakBonus>
-                        <TableInputLabel>High</TableInputLabel>
                         <TableNumInput
                           value={scoreData[notesType].detail['highPerfect']}
                           type="text"
                           onChange={(e) => onChange(e.target.value, notesType, 'highPerfect')}
                         />
+                        <TableInputLabel>High</TableInputLabel>
                       </TableBreakBonus>
                       <TableBreakBonus>
-                        <TableInputLabel>Low</TableInputLabel>
                         <TableNumInput
                           value={scoreData[notesType].detail['lowPerfect']}
                           type="text"
                           onChange={(e) => onChange(e.target.value, notesType, 'lowPerfect')}
                         />
+                        <TableInputLabel>Low</TableInputLabel>
                       </TableBreakBonus>
                     </TableData>
                   );
