@@ -5,6 +5,7 @@ import { NewScoreBoard } from '../components/NewScoreBoard';
 import { Header } from '../components/Header';
 import { Table } from '../components/Table';
 import { useScore } from '../hooks/useScore';
+import { mediaQuery } from '../constants/mediaQuery';
 
 const TableWrapper = styled.div`
   width: 100%;
@@ -13,13 +14,13 @@ const TableWrapper = styled.div`
 const ScoreBoards = styled.div`
   display: flex;
   margin: 40px auto;
-  @media screen and (min-width: 1400px) {
+  @media screen and (min-width: ${mediaQuery['pc'].min}) {
     width: 90%;
     flex-direction: row;
     column-gap: 30px;
     justify-content: center;
   }
-  @media screen and (max-width: 1399px) {
+  @media screen and (max-width: ${mediaQuery['tb'].max}) {
     width: 80%;
     flex-direction: column;
     row-gap: 30px;

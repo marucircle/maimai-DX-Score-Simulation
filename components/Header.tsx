@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { fontSize } from '../constants/font';
+import { mediaQuery } from '../constants/mediaQuery';
 
 export type HeaderProps = {
   children?: ReactNode;
@@ -15,7 +16,7 @@ const StyledHeader = styled.header`
   flex-direction: row;
   justify-content: center;
   column-gap: 15px;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: ${mediaQuery['sp'].max}) {
     flex-direction: column;
     align-items: center;
     row-gap: 5px;
