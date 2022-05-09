@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ClassicScoreColor } from '../constants/color';
-import { scoreValidation } from '../functions/scoreValidation';
+import { scoreFloor, scoreValidation } from '../functions/scoreValidation';
 export type NewScoreBoardProps = {
   scoreData: {
     total: number;
@@ -65,11 +65,11 @@ export const NewScoreBoard = ({ scoreData }: NewScoreBoardProps) => {
     <StyledClassicScoreBoard>
       <BoardTitle>新筐体 達成率</BoardTitle>
       <Achievement>
-        {Math.round(
-          (scoreValidation(scoreData.total, scoreData.max) * 100 +
-            scoreValidation(scoreData.totalBreakBonus, scoreData.maxBreakBonus)) *
-            Math.pow(10, 5)
-        ) / Math.pow(10, 5)}
+        {scoreFloor(
+          scoreValidation(scoreData.total, scoreData.max) * 100 +
+            scoreValidation(scoreData.totalBreakBonus, scoreData.maxBreakBonus),
+          5
+        )}
         <AchievementPercent>%</AchievementPercent>
       </Achievement>
       {/* <ScoreDetail>
