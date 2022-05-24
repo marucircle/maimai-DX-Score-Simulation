@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { mediaQuery } from '../constants/mediaQuery';
 
 type TabNavigationProps = {
   onChange: (value: string) => void;
@@ -9,10 +10,15 @@ const StyledTabNavigation = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  padding-bottom: 5px;
+  @media screen and (max-width: ${mediaQuery['sp'].max}) {
+    grid-template-columns: 1fr;
+    grid-row-gap: 10px;
+    padding-bottom: 0;
+  }
   background-color: #4850b9;
   color: #eeeeee;
-  padding-bottom: 5px;
-  box-shadow: 0px 2.5px 3px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 2px 3px 0 rgba(0, 0, 0, 0.4);
 `;
 
 const Tab = styled.div<{ isActive: boolean }>`
@@ -35,20 +41,41 @@ const Tab = styled.div<{ isActive: boolean }>`
   //     }
   //   }
 
-  ${({ isActive }) =>
-    isActive &&
-    css`
-      &::before {
-        content: '';
-        position: absolute;
-        background-color: #80ffdb;
-        width: 100%;
-        height: 6px;
-        bottom: -5px;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-    `}
+  @media screen and (min-width: ${mediaQuery['tb'].min}) {
+    ${({ isActive }) =>
+      isActive &&
+      css`
+        &::before {
+          content: '';
+          position: absolute;
+          background-color: #0e185f;
+          width: 100%;
+          height: 6px;
+          bottom: -5px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      `}
+  }
+
+  @media screen and (max-width: ${mediaQuery['sp'].max}) {
+    padding: 10px 0;
+    ${({ isActive }) =>
+      isActive &&
+      css`
+        background-color: #0e185f;
+        color: #ffffff;
+        &::before {
+          content: '';
+          position: absolute;
+          background-color: #ffffff;
+          height: 100%;
+          width: 8px;
+          bottom: 0;
+          left: 0px;
+        }
+      `}
+  }
 `;
 
 export const TabNavigation = ({ onChange, mode }: TabNavigationProps) => {
