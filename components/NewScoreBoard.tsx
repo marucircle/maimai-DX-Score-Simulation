@@ -69,7 +69,7 @@ export const NewScoreBoard = ({ scoreData }: NewScoreBoardProps) => {
           scoreValidation(scoreData.total, scoreData.max) * 100 +
             scoreValidation(scoreData.totalBreakBonus, scoreData.maxBreakBonus),
           5
-        )}
+        ).toFixed(5)}
         <AchievementPercent>%</AchievementPercent>
       </Achievement>
       {/* <ScoreDetail>
