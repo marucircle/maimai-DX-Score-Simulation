@@ -6,6 +6,7 @@ import { Header } from '../components/Header';
 import { Table } from '../components/Table';
 import { useScore } from '../hooks/useScore';
 import { mediaQuery } from '../constants/mediaQuery';
+import { DXScoreBoard } from '../components/DXScoreBoard';
 
 const TableWrapper = styled.div`
   width: 100%;
@@ -29,7 +30,7 @@ const ScoreBoards = styled.div`
 `;
 
 const Home = () => {
-  const { scoreData, editScoreData, classicScore, newScore } = useScore();
+  const { scoreData, editScoreData, classicScore, newScore, DXScore } = useScore();
   return (
     <div>
       <Header>
@@ -39,6 +40,7 @@ const Home = () => {
       <ScoreBoards>
         <ClassicScoreBoard scoreData={classicScore} />
         <NewScoreBoard scoreData={newScore} />
+        <DXScoreBoard scoreData={DXScore} />
       </ScoreBoards>
       <TableWrapper>
         <Table scoreData={scoreData} onChange={editScoreData} />
