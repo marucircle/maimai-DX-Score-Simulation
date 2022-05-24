@@ -10,6 +10,7 @@ export type HeaderProps = {
 const StyledHeader = styled.header`
   font-size: ${fontSize['large']};
   padding: 20px 0;
+  padding-bottom: 40px;
   font-family: Noto Sans Noto Sans JP;
   font-weight: bold;
   display: flex;
