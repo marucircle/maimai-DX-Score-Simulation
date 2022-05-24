@@ -30,6 +30,11 @@ const ScoreBoards = styled.div`
   }
 `;
 
+const MainView = styled.div`
+  padding-top: 10px;
+  padding-bottom: 20px;
+`;
+
 const Home = () => {
   const { scoreData, editScoreData, classicScore, newScore, DXScore } = useScore();
   const [mode, setMode] = useState('Classic');
@@ -40,14 +45,16 @@ const Home = () => {
         <span>すこあしみゅれーたー</span>
       </Header>
       <TabNavigation onChange={setMode} mode={mode} />
-      <ScoreBoards>
-        {mode === 'Classic' ? <ClassicScoreBoard scoreData={classicScore} /> : ''}
-        {mode === 'New' ? <NewScoreBoard scoreData={newScore} /> : ''}
-        {mode === 'DX' ? <DXScoreBoard scoreData={DXScore} /> : ''}
-      </ScoreBoards>
-      <TableWrapper>
-        <Table scoreData={scoreData} onChange={editScoreData} />
-      </TableWrapper>
+      <MainView>
+        <ScoreBoards>
+          {mode === 'Classic' ? <ClassicScoreBoard scoreData={classicScore} /> : ''}
+          {mode === 'New' ? <NewScoreBoard scoreData={newScore} /> : ''}
+          {mode === 'DX' ? <DXScoreBoard scoreData={DXScore} /> : ''}
+        </ScoreBoards>
+        <TableWrapper>
+          <Table scoreData={scoreData} onChange={editScoreData} />
+        </TableWrapper>
+      </MainView>
     </div>
   );
 };

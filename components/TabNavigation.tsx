@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 type TabNavigationProps = {
   onChange: (value: string) => void;
@@ -9,13 +9,16 @@ const StyledTabNavigation = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  border-bottom: 6px solid #333333;
-  padding-bottom: 10px;
+  background-color: #4850b9;
+  color: #eeeeee;
+  padding-bottom: 5px;
+  box-shadow: 0px 2.5px 3px 0 rgba(0, 0, 0, 0.4);
 `;
 
 const Tab = styled.div<{ isActive: boolean }>`
   position: relative;
   font-family: Noto Sans Noto Sans JP;
+  font-weight: 600;
   font-size: 25px;
   cursor: pointer;
   text-align: center;
@@ -31,6 +34,21 @@ const Tab = styled.div<{ isActive: boolean }>`
   //       top: 0px;
   //     }
   //   }
+
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      &::before {
+        content: '';
+        position: absolute;
+        background-color: #80ffdb;
+        width: 100%;
+        height: 6px;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    `}
 `;
 
 export const TabNavigation = ({ onChange, mode }: TabNavigationProps) => {
