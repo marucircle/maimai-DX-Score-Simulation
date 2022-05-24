@@ -42,7 +42,7 @@ export const DXScoreCalc = (scorePoints: ScorePoint[]) => {
     0
   );
   if (maxScore === 0) {
-    return 0;
+    return { max: 0, total: 0 };
   }
   return {
     max: maxScore,

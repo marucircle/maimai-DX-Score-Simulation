@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { classicScoreCalc } from '../functions/classicScoreCalc';
+import { DXScoreCalc } from '../functions/DXScoreCalc';
 import { newScoreCalc } from '../functions/newScoreCalc';
 import { Evaluation, NotesType, ScoreDataType } from '../types/score';
 
@@ -115,6 +116,7 @@ export const useScore = () => {
     });
     setClassicScore(Object.assign({}, classicScoreCalc(calcData)));
     setNewScore(Object.assign({}, newScoreCalc(calcData)));
+    setDXScore(Object.assign({}, DXScoreCalc(calcData)));
   }, [scoreData]);
 
   return {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ClassicScoreBoard } from '../components/ClassicScoreBoard';
 import { NewScoreBoard } from '../components/NewScoreBoard';
@@ -6,6 +6,8 @@ import { Header } from '../components/Header';
 import { Table } from '../components/Table';
 import { useScore } from '../hooks/useScore';
 import { mediaQuery } from '../constants/mediaQuery';
+import { DXScoreBoard } from '../components/DXScoreBoard';
+import { TabNavigation } from '../components/TabNavigation';
 
 const TableWrapper = styled.div`
   width: 100%;
@@ -28,21 +30,31 @@ const ScoreBoards = styled.div`
   }
 `;
 
+const MainView = styled.div`
+  padding-top: 10px;
+  padding-bottom: 20px;
+`;
+
 const Home = () => {
-  const { scoreData, editScoreData, classicScore, newScore } = useScore();
+  const { scoreData, editScoreData, classicScore, newScore, DXScore } = useScore();
+  const [mode, setMode] = useState('Classic');
   return (
     <div>
       <Header>
         <span>maimaiでらっくす</span>
         <span>すこあしみゅれーたー</span>
       </Header>
-      <ScoreBoards>
-        <ClassicScoreBoard scoreData={classicScore} />
-        <NewScoreBoard scoreData={newScore} />
-      </ScoreBoards>
-      <TableWrapper>
-        <Table scoreData={scoreData} onChange={editScoreData} />
-      </TableWrapper>
+      <TabNavigation onChange={setMode} mode={mode} />
+      <MainView>
+        <ScoreBoards>
+          {mode === 'Classic' ? <ClassicScoreBoard scoreData={classicScore} /> : ''}
+          {mode === 'New' ? <NewScoreBoard scoreData={newScore} /> : ''}
+          {mode === 'DX' ? <DXScoreBoard scoreData={DXScore} /> : ''}
+        </ScoreBoards>
+        <TableWrapper>
+          <Table scoreData={scoreData} onChange={editScoreData} />
+        </TableWrapper>
+      </MainView>
     </div>
   );
 };
