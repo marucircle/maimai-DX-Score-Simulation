@@ -66,7 +66,7 @@ export const ClassicScoreBoard = ({ scoreData }: ClassicScoreBoardProps) => {
     <StyledClassicScoreBoard>
       <BoardTitle>旧筐体 達成率</BoardTitle>
       <Achievement>
-        {scoreFloor(scoreValidation(scoreData.total, scoreData.max) * 100, 2)}
+        {scoreFloor(scoreValidation(scoreData.total, scoreData.max) * 100, 2).toFixed(2)}
         <AchievementPercent>%</AchievementPercent>
       </Achievement>
       <ScoreDetail>
