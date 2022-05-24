@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ClassicScoreColor } from '../constants/color';
+import { mediaQuery } from '../constants/mediaQuery';
 import { scoreFloor, scoreValidation } from '../functions/scoreValidation';
 
 export type ClassicScoreBoardProps = {
@@ -31,11 +32,17 @@ const BoardTitle = styled.div`
   letter-spacing: 2px;
   text-shadow: white 2px 2px 0, white -2px -2px 0, /*右下、左上*/ white -2px 2px 0, white 2px -2px 0,
     /*右上、左下*/ white 0px 2px 0, white 0 -2px 0, /*右、左*/ white -2px 0 0, white 2px 0 0;
+  @media screen and (max-width: ${mediaQuery['sp'].max}) {
+    font-size: 25px;
+  }
 `;
 
 const Achievement = styled.div`
   text-align: center;
   font-size: 50px;
+  @media screen and (max-width: ${mediaQuery['sp'].max}) {
+    font-size: 40px;
+  }
   color: ${ClassicScoreColor['text']};
   letter-spacing: 2px;
   text-shadow: ${ClassicScoreColor['shadow']} 2px 2px 0, ${ClassicScoreColor['shadow']} -2px -2px 0,

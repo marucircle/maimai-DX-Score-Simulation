@@ -20,6 +20,9 @@ const StyledTable = styled.table`
   line-height: 17px;
   background: #fff;
   font-family: Noto Sans;
+  @media screen and (max-width: ${mediaQuery['sp'].max}) {
+    width: 100%;
+  }
 `;
 
 const TableBody = styled.tbody`
