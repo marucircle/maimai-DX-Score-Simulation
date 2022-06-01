@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 import styled from 'styled-components';
 import { ClassicScoreBoard } from '../components/ClassicScoreBoard';
 import { NewScoreBoard } from '../components/NewScoreBoard';
@@ -36,8 +37,18 @@ const MainView = styled.div`
 `;
 
 const Home = () => {
-  const { scoreData, editScoreData, classicScore, newScore, DXScore } = useScore();
+  const { scoreData, setScoreData, editScoreData, classicScore, newScore, DXScore } = useScore();
   const [mode, setMode] = useState('Classic');
+
+  useEffect(() => {
+    const jsonStr = Cookies.get('score_data');
+    console.log(Cookies.get());
+    if (jsonStr) {
+      setScoreData(JSON.parse(jsonStr));
+      Cookies.remove('score_data');
+    }
+  }, []);
+
   return (
     <div>
       <Header>
