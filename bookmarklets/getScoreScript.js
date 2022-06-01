@@ -1,4 +1,5 @@
 javascript: (function () {
+  const url = 'https://maimai-dx-score-simulation.vercel.app/';
   let score = {
     tap: {
       total: 0,
@@ -120,6 +121,17 @@ javascript: (function () {
       }
     }
   }
+  let cookies = '';
+  cookies = 'score_data=' + JSON.stringify(score) + ';';
+  cookies += 'domain=maimai-dx-score-simulation.vercel.app;';
+  cookies += 'path=/;';
+  let period = 30;
+  let expire = new Date();
+  expire.setTime(expire.getTime() + 1000 * 3600 * 24 * period);
+  expire.toUTCString();
+  cookies += 'expires=' + expire + ';';
+  document.cookie = cookies;
 
-  console.log(score);
+  alert('スコア取得に成功しました！');
+  location.href = url;
 })();
