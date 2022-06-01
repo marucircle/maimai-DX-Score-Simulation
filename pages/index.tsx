@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
 import styled from 'styled-components';
 import { ClassicScoreBoard } from '../components/ClassicScoreBoard';
 import { NewScoreBoard } from '../components/NewScoreBoard';
