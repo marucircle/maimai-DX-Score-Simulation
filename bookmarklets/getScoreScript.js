@@ -102,7 +102,7 @@ javascript: (function () {
           break;
         }
         case 1: {
-          if (note === 'Break') score[note].detail.highPerfect += parseInt(detail[j].innerText);
+          if (note === 'break') score[note].detail.highPerfect += parseInt(detail[j].innerText);
           else score[note].detail.perfect += parseInt(detail[j].innerText);
           break;
         }
