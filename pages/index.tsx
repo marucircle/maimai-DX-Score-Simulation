@@ -9,6 +9,7 @@ import { useScore } from '../hooks/useScore';
 import { mediaQuery } from '../constants/mediaQuery';
 import { DXScoreBoard } from '../components/DXScoreBoard';
 import { TabNavigation } from '../components/TabNavigation';
+import { useRouter } from 'next/router';
 
 const TableWrapper = styled.div`
   width: 100%;
@@ -37,17 +38,28 @@ const MainView = styled.div`
 `;
 
 const Home = () => {
+  const router = useRouter();
   const { scoreData, setScoreData, editScoreData, classicScore, newScore, DXScore } = useScore();
   const [mode, setMode] = useState('Classic');
 
   useEffect(() => {
-    const jsonStr = Cookies.get('score_data');
-    console.log(Cookies.get());
-    if (jsonStr) {
-      setScoreData(JSON.parse(jsonStr));
-      Cookies.remove('score_data');
+    try {
+      if (router.query.scoreQuery) {
+        sessionStorage.setItem(
+          'maimai-dx_score_data',
+          decodeURIComponent(router.query.scoreQuery.toString())
+        );
+        router.replace(router.pathname);
+      }
+      const jsonStr = sessionStorage.getItem('maimai-dx_score_data');
+      if (jsonStr) {
+        setScoreData(JSON.parse(jsonStr));
+        sessionStorage.removeItem('maimai-dx_score_data');
+      }
+    } catch (error) {
+      alert('不正なパラメータが入力されました。');
     }
-  }, []);
+  }, [router.query]);
 
   return (
     <div>
