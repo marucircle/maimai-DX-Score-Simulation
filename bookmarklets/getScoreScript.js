@@ -66,6 +66,7 @@ javascript: (function () {
 
   if (!view) {
     alert('maimaiでらっくすのスコア詳細画面で操作を行ってください。');
+    return;
   }
   const rows = view.querySelectorAll('tr');
   for (let i = 1; i < rows.length; i++) {
