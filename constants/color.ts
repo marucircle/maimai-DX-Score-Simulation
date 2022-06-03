@@ -12,3 +12,7 @@ export const ClassicScoreColor = {
   text: '#ffbc09',
   shadow: '#ff9d00',
 };
+
+export const BaseColor = {
+  white: '#fefefe',
+};
