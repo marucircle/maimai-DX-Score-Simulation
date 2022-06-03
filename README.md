@@ -1,59 +1,38 @@
 # maimai-DX-Score-Simulation
 
-## スコア計算
+## 概要
+- 株式会社セガの制作するアーケードゲーム「maimaiでらっくす」のスコアシミュレーションツールです。
+- 本ツールはファンメイドであり、株式会社セガとは一切関係はありません。
 
-### 旧筐体
+## 対応確認済みブラウザ
+- Google Chrome
+- Safari
 
-- 通常ノーツ
+## 利用方法
+- 本ツールの利用方法は２つ存在します。
+- 基本的にはブックマークレットの利用を推奨しますが、該当リザルト画面がない場合、直接サイトからツールをご利用ください。
 
-|  ノーツ名    |  Critical Perfect  |  Perfect  |  Great  |  Good  |  miss  |
-| ---- | ---- | ---- | ---- | ---- | ---- |
-| Tap | 500 | 500 | 500 * 0.8 | 500 * 0.5 | 0 |
-| Hold | 1000 | 1000 | 1000 * 0.8 | 1000 * 0.5 | 0 |
-| Slide | 1500 | 1500 | 1500 * 0.8 | 1500 * 0.5 | 0 |
+### 直接サイトにアクセスし、ツールを利用する
+- こちらの手法を利用する場合、直接[ツールサイト](https://maimai-dx-score-simulation.vercel.app/)にアクセスしてください。
 
-- BREAK（本来はGREATも細かいが、今回は全て2000点として扱う）
 
-|   Critical Perfect   |  Perfect (High)  |  Perfect (Low)  |  Great  |  Good  |  miss  |
-| ---- | ---- | ---- | ---- | ---- | ---- |
-| 2600 | 2550 | 2500 | 2000 | 1000 | 0 |
+### maimaiでらっくすNETからブックマークレットを実行し、ツールを利用する
+- こちらの手法を利用するためには、[maimaiでらっくすNET](https://maimaidx.jp/maimai-mobile/)へのログインが必要となります。
 
-### 新筐体
+<strong>1. maimaiでらっくすNETへログインする</strong><br>
 
-- 通常ノーツ
+![image](https://user-images.githubusercontent.com/65604109/171916356-118e4b21-9317-430e-b616-c0ff59e5331d.png)<br>
 
-|  ノーツ名    |  Critical Perfect  |  Perfect  |  Great  |  Good  |  miss  |
-| ---- | ---- | ---- | ---- | ---- | ---- |
-| Tap | 1 | 1 | 1 * 0.8 | 1 * 0.5 | 0 |
-| Touch | 1 | 1 | 1 * 0.8 | 1 * 0.5 | 0 |
-| Hold | 2 | 2 | 2 * 0.8 | 2 * 0.5 | 0 |
-| Slide | 3 | 3 | 3 * 0.8 | 3 * 0.5 | 0 |
 
-- BREAK
+<strong>2. 「レコード一覧」画面を表示</strong><br>
 
-|   Critical Perfect　|  Perfect (High)  |  Perfect (Low)  |  Great  |  Good  |  miss  |
-| ---- | ---- | ---- | ---- | ---- | ---- |
-| 5 | 5 | 5 | 4 | 2 | 0 |
+![image](https://user-images.githubusercontent.com/65604109/171913615-52d2ac5c-3987-4f07-9ba1-e8d980e8b23a.png)<br>
 
-### BREAKボーナス
+<strong>3. 「レコード一覧」からシミュレートしたいリザルトの詳細画面を表示する</strong><br>
 
-- 旧筐体
+![image](https://user-images.githubusercontent.com/65604109/171915540-558ac993-4bd6-476c-8013-cf141aceb1d3.png)<br>
 
-|   Critical Perfect　|  Perfect (High)  |  Perfect (Low)  |  Great  |  Good  |  miss  |
-| ---- | ---- | ---- | ---- | ---- | ---- |
-| 100 | 50 | 0 | 0 | 0 | 0 |
-
-- 新筐体
-
-|   Critical Perfect　|  Perfect (High)  |  Perfect (Low)  |  Great  |  Good  |  miss  |
-| ---- | ---- | ---- | ---- | ---- | ---- |
-| 1 | 0.75 | 0.5 | 0.4 | 0.3 | 0 |
-
-### 計算方法
-- 旧筐体
-基本点　＝　スコア合計 / 該当楽曲の配点合計
-達成率　＝　(スコア合計 + BREAKボーナスの合計) / スコア合計 * 100%
-
-- 新筐体
-基本点　＝　(各ノーツの評点合計 / 該当楽曲の評価値合計) * 100%
-達成率　＝　(基本点 + BREAKボーナスの合計) * 100%
+<strong>4. ブックマークレットを実行する</strong>
+- ブックマークレットは、[こちらのコード](https://github.com/kirby0113/maimai-DX-Score-Simulation/blob/main/bookmarklets/getScoreScript.js)を登録してください。
+- ブックマークレットを登録し、該当画面で実行すると、以下のようにツール画面に遷移します。
+![image](https://user-images.githubusercontent.com/65604109/171918201-50d415a2-eedd-4ccc-8c37-fc12ced56224.png)
