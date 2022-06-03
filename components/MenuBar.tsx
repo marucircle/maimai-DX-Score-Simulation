@@ -1,4 +1,7 @@
+import Link from 'next/link';
 import styled from 'styled-components';
+import { SiTwitter, SiGithub } from 'react-icons/si';
+import { GrClose } from 'react-icons/gr';
 import { BaseColor } from '../constants/color';
 import { fontSize } from '../constants/font';
 
@@ -15,17 +18,22 @@ export type MenuBarProps = {
 const StyledMenuBar = styled.div`
   padding: 20px;
   width: 100%;
-  height: 100vh;
+  height: 95vh;
   max-width: 400px;
   background-color: ${BaseColor['white']};
   display: flex;
   flex-direction: column;
 `;
 
-const CloseButton = styled.div``;
+const CloseButton = styled.div`
+  cursor: pointer;
+`;
+
+const IconLink = styled.div`
+  cursor: pointer;
+`;
 
 const LinkFlex = styled.div`
-  margin: 20px 0;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -50,18 +58,21 @@ const MenuBarLink = styled.div`
 const MenuBarLinks = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
   row-gap: 25px;
 `;
 
 const BottomLinks = styled.div`
   display: flex;
-  column-gap: 20px;
+  justify-content: space-around;
 `;
 
 export const MenuBar = ({ links, onClose }: MenuBarProps) => {
   return (
     <StyledMenuBar>
-      <CloseButton onClick={onClose}>閉じる</CloseButton>
+      <CloseButton onClick={onClose}>
+        <GrClose size="30" />
+      </CloseButton>
       <LinkFlex>
         <MenuBarLinks>
           {links.map((link) => {
@@ -69,8 +80,16 @@ export const MenuBar = ({ links, onClose }: MenuBarProps) => {
           })}
         </MenuBarLinks>
         <BottomLinks>
-          <div>Github</div>
-          <div>Twitter</div>
+          <IconLink>
+            <Link href={process.env.githubURL ? process.env.githubURL : ''}>
+              <SiGithub size="50" />
+            </Link>
+          </IconLink>
+          <IconLink>
+            <Link href={process.env.twitterURL ? process.env.twitterURL : ''}>
+              <SiTwitter size="50" color="#1DA1F2" />
+            </Link>
+          </IconLink>
         </BottomLinks>
       </LinkFlex>
     </StyledMenuBar>
