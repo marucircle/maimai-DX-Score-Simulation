@@ -18,11 +18,12 @@ export type MenuBarProps = {
 const StyledMenuBar = styled.div`
   padding: 20px;
   width: 100%;
-  height: 95vh;
+  height: 100vh;
   max-width: 400px;
   background-color: ${BaseColor['white']};
   display: flex;
   flex-direction: column;
+  box-shadow: 6px 4px 10px 4px #000000;
 `;
 
 const CloseButton = styled.div`
