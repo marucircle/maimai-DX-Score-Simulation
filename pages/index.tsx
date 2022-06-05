@@ -9,6 +9,8 @@ import { mediaQuery } from '../constants/mediaQuery';
 import { DXScoreBoard } from '../components/DXScoreBoard';
 import { TabNavigation } from '../components/TabNavigation';
 import { useRouter } from 'next/router';
+import { MenuBar } from '../components/MenuBar';
+import { useModal } from '../hooks/useModal';
 
 const TableWrapper = styled.div`
   width: 100%;
@@ -36,10 +38,32 @@ const MainView = styled.div`
   padding-bottom: 20px;
 `;
 
+const MenuBarWrapper = styled.div<{ isOpen: boolean }>`
+  position: fixed;
+  width: 100vw;
+  max-width: 400px;
+  right: ${({ isOpen }) => (isOpen ? '0' : '-410px')};
+  top: 0;
+  z-index: 10;
+  transition: right 0.3s;
+`;
+
+const Overlay = styled.div<{ isOpen: boolean }>`
+  z-index: 5;
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000030;
+`;
+
 const Home = () => {
   const router = useRouter();
   const { scoreData, setScoreData, editScoreData, classicScore, newScore, DXScore } = useScore();
   const [mode, setMode] = useState('Classic');
+  const { isOpen, setIsOpen } = useModal();
 
   useEffect(() => {
     try {
@@ -65,6 +89,7 @@ const Home = () => {
       <Header>
         <span>maimaiでらっくす</span>
         <span>すこあしみゅれーたー</span>
+        <div onClick={() => setIsOpen(true)}>メニュー</div>
       </Header>
       <TabNavigation onChange={setMode} mode={mode} />
       <MainView>
@@ -76,6 +101,10 @@ const Home = () => {
         <TableWrapper>
           <Table scoreData={scoreData} onChange={editScoreData} />
         </TableWrapper>
+        <MenuBarWrapper isOpen={isOpen}>
+          <MenuBar links={[{ path: '/test1', text: 'test1' }]} onClose={() => setIsOpen(false)} />
+        </MenuBarWrapper>
+        <Overlay onClick={() => setIsOpen(false)} isOpen={isOpen} />
       </MainView>
     </div>
   );

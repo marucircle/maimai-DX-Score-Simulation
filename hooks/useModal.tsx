@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext } from 'react';
 
-const ModalContext = createContext({});
+const ModalContext = createContext({ isOpen: false, setIsOpen: (value: boolean) => {} });
 
 export const ModalProvider: React.FC<React.ReactNode> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
