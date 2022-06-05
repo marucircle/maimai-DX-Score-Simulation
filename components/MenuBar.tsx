@@ -16,7 +16,7 @@ export type MenuBarProps = {
 };
 
 const StyledMenuBar = styled.div`
-  padding: 20px;
+  padding: 20px 0;
   width: 100%;
   height: 100vh;
   max-width: 300px;
@@ -27,6 +27,7 @@ const StyledMenuBar = styled.div`
 `;
 
 const CloseButton = styled.div`
+  margin-left: 20px;
   cursor: pointer;
 `;
 
@@ -42,18 +43,18 @@ const LinkFlex = styled.div`
 `;
 
 const MenuBarLink = styled.div`
+  text-align: center;
+  padding: 10px 30px 10px 20px;
   font-size: ${fontSize['large']};
+  font-weight: bold;
   position: relative;
-  &::after {
-    content: '';
-    height: 2px;
-    width: 100%;
-    background-color: #333333;
-    position: absolute;
-    top: 100%;
-    left: 0;
-  }
   cursor: pointer;
+
+  &:hover {
+    background-color: #00000030;
+  }
+
+  transition: background-color 0.2s;
 `;
 
 const MenuBarLinks = styled.div`
