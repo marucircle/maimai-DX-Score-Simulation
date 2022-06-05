@@ -19,7 +19,7 @@ const StyledMenuBar = styled.div`
   padding: 20px;
   width: 100%;
   height: 100vh;
-  max-width: 400px;
+  max-width: 300px;
   background-color: ${BaseColor['white']};
   display: flex;
   flex-direction: column;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { AiOutlineMenu } from 'react-icons/ai';
 import { ClassicScoreBoard } from '../components/ClassicScoreBoard';
 import { NewScoreBoard } from '../components/NewScoreBoard';
 import { Header } from '../components/Header';
@@ -41,8 +42,8 @@ const MainView = styled.div`
 const MenuBarWrapper = styled.div<{ isOpen: boolean }>`
   position: fixed;
   width: 100vw;
-  max-width: 400px;
-  right: ${({ isOpen }) => (isOpen ? '0' : '-410px')};
+  max-width: 300px;
+  right: ${({ isOpen }) => (isOpen ? '0' : '-310px')};
   top: 0;
   z-index: 10;
   transition: right 0.3s;
@@ -59,11 +60,19 @@ const Overlay = styled.div<{ isOpen: boolean }>`
   background-color: #00000030;
 `;
 
+const MenuButton = styled.div`
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  right: 20px;
+`;
+
 const Home = () => {
   const router = useRouter();
   const { scoreData, setScoreData, editScoreData, classicScore, newScore, DXScore } = useScore();
   const [mode, setMode] = useState('Classic');
   const { isOpen, setIsOpen } = useModal();
+  const MenuLinks = [{ path: '/', text: 'メインページ' }];
 
   useEffect(() => {
     try {
@@ -89,7 +98,6 @@ const Home = () => {
       <Header>
         <span>maimaiでらっくす</span>
         <span>すこあしみゅれーたー</span>
-        <div onClick={() => setIsOpen(true)}>メニュー</div>
       </Header>
       <TabNavigation onChange={setMode} mode={mode} />
       <MainView>
@@ -102,10 +110,13 @@ const Home = () => {
           <Table scoreData={scoreData} onChange={editScoreData} />
         </TableWrapper>
         <MenuBarWrapper isOpen={isOpen}>
-          <MenuBar links={[{ path: '/test1', text: 'test1' }]} onClose={() => setIsOpen(false)} />
+          <MenuBar links={MenuLinks} onClose={() => setIsOpen(false)} />
         </MenuBarWrapper>
         <Overlay onClick={() => setIsOpen(false)} isOpen={isOpen} />
       </MainView>
+      <MenuButton onClick={() => setIsOpen(true)}>
+        <AiOutlineMenu size="40" color="white" />
+      </MenuButton>
     </div>
   );
 };
