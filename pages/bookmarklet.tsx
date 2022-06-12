@@ -20,7 +20,7 @@ const MenuButton = styled.div`
   right: 20px;
 `;
 
-const Tutorial = () => {
+const Bookmarklet = () => {
   const { isOpen, setIsOpen } = useModal();
   return (
     <div>
@@ -41,4 +41,4 @@ const Tutorial = () => {
   );
 };
 
-export default Tutorial;
+export default Bookmarklet;
