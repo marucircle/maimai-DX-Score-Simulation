@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 type OverlayProps = {
   isOpen: boolean;
+  onClick: () => void;
 };
 
 const StyledOverlay = styled.div<{ isOpen: boolean }>`
@@ -15,6 +16,6 @@ const StyledOverlay = styled.div<{ isOpen: boolean }>`
   background-color: #00000030;
 `;
 
-export const Overlay = ({ isOpen }: OverlayProps): JSX.Element => {
-  return <StyledOverlay isOpen={isOpen} />;
+export const Overlay = ({ isOpen, onClick }: OverlayProps): JSX.Element => {
+  return <StyledOverlay onClick={onClick} isOpen={isOpen} />;
 };
