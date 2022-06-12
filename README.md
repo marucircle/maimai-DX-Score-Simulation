@@ -33,6 +33,7 @@
 ![image](https://user-images.githubusercontent.com/65604109/171915540-558ac993-4bd6-476c-8013-cf141aceb1d3.png)<br>
 
 <strong>4. ブックマークレットを実行する</strong>
-- ブックマークレットは、[こちらのコード](https://github.com/kirby0113/maimai-DX-Score-Simulation/blob/main/bookmarklets/getScoreScript.js)を登録してください。
+- ブックマークレットは、[こちらのコード](https://github.com/kirby0113/maimai-DX-Score-Simulation/blob/main/bookmarklets/getScoreScript.js)を登録してください。<br>
+(v1.1.5より、ツールサイト内のメニューバーからブックマークレットを直接コピー可能となりました。)
 - ブックマークレットを登録し、該当画面で実行すると、以下のようにツール画面に遷移します。
 ![image](https://user-images.githubusercontent.com/65604109/171918201-50d415a2-eedd-4ccc-8c37-fc12ced56224.png)
