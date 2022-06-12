@@ -14,6 +14,7 @@ import { MenuBar } from '../components/MenuBar';
 import { useModal } from '../hooks/useModal';
 import { MenuBarWrapper } from '../components/MenuBar';
 import { Overlay } from '../components/utils/Overlay';
+import { MenuLinks } from '../constants/link';
 
 const TableWrapper = styled.div`
   width: 100%;
@@ -53,10 +54,6 @@ const Home = () => {
   const { scoreData, setScoreData, editScoreData, classicScore, newScore, DXScore } = useScore();
   const [mode, setMode] = useState('Classic');
   const { isOpen, setIsOpen } = useModal();
-  const MenuLinks = [
-    { path: '/', text: 'メインページ' },
-    { path: '/tutorial', text: '使い方' },
-  ];
 
   useEffect(() => {
     try {
