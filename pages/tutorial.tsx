@@ -6,31 +6,12 @@ import { TabNavigation } from '../components/TabNavigation';
 import { useRouter } from 'next/router';
 import { MenuBar } from '../components/MenuBar';
 import { useModal } from '../hooks/useModal';
+import { Overlay } from '../components/utils/Overlay';
+import { MenuBarWrapper } from '../components/MenuBar';
 
 const MainView = styled.div`
   padding-top: 10px;
   padding-bottom: 20px;
-`;
-
-const MenuBarWrapper = styled.div<{ isOpen: boolean }>`
-  position: fixed;
-  width: 100vw;
-  max-width: 300px;
-  right: ${({ isOpen }) => (isOpen ? '0' : '-310px')};
-  top: 0;
-  z-index: 10;
-  transition: right 0.3s;
-`;
-
-const Overlay = styled.div<{ isOpen: boolean }>`
-  z-index: 5;
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #00000030;
 `;
 
 const MenuButton = styled.div`

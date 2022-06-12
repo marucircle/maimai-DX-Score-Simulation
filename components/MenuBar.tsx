@@ -97,3 +97,22 @@ export const MenuBar = ({ links, onClose }: MenuBarProps) => {
     </StyledMenuBar>
   );
 };
+
+type MenuBarWrapperProps = {
+  isOpen: boolean;
+  children: React.ReactNode;
+};
+
+const StyledMenuBarWrapper = styled.div<{ isOpen: boolean }>`
+  position: fixed;
+  width: 100vw;
+  max-width: 300px;
+  right: ${({ isOpen }) => (isOpen ? '0' : '-310px')};
+  top: 0;
+  z-index: 10;
+  transition: right 0.3s;
+`;
+
+export const MenuBarWrapper = ({ children, isOpen }: MenuBarWrapperProps): JSX.Element => {
+  return <StyledMenuBarWrapper isOpen={isOpen}>{children}</StyledMenuBarWrapper>;
+};
