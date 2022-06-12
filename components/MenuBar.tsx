@@ -5,6 +5,8 @@ import { GrClose } from 'react-icons/gr';
 import { BaseColor } from '../constants/color';
 import { fontSize } from '../constants/font';
 import { useRouter } from 'next/router';
+import { BookMarkletTemplate } from '../constants/clipboard';
+import { useModal } from '../hooks/useModal';
 
 export type MenuBarLink = {
   text: string;
@@ -46,7 +48,7 @@ const LinkFlex = styled.div`
 const MenuBarLink = styled.div`
   text-align: center;
   padding: 10px 30px 10px 20px;
-  font-size: ${fontSize['large']};
+  font-size: ${fontSize['medium']};
   font-weight: bold;
   position: relative;
   cursor: pointer;
@@ -70,8 +72,20 @@ const BottomLinks = styled.div`
   justify-content: space-around;
 `;
 
+const pasteClipboard = () => {
+  navigator.clipboard
+    .writeText(BookMarkletTemplate)
+    .then(() => {
+      alert('ブック―マークレットをコピーしました！');
+    })
+    .catch(() => {
+      alert('コピーに失敗しました...');
+    });
+};
+
 export const MenuBar = ({ links, onClose }: MenuBarProps) => {
   const router = useRouter();
+  const { setIsOpen } = useModal();
   return (
     <StyledMenuBar>
       <CloseButton onClick={onClose}>
@@ -85,12 +99,18 @@ export const MenuBar = ({ links, onClose }: MenuBarProps) => {
                 key={link.text + link.path}
                 onClick={() => {
                   router.push(link.path);
+                  setIsOpen(false);
                 }}
               >
                 {link.text}
               </MenuBarLink>
             );
           })}
+          <MenuBarLink key="bookmarklet-copy" onClick={pasteClipboard}>
+            ブックマークレット
+            <br />
+            をコピー
+          </MenuBarLink>
         </MenuBarLinks>
         <BottomLinks>
           <IconLink>
