@@ -1,10 +1,13 @@
 import { AppProps } from 'next/app';
+import { ModalProvider } from '../hooks/useModal';
 import 'ress';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Component {...pageProps} />
+      <ModalProvider>
+        <Component {...pageProps} />
+      </ModalProvider>
     </>
   );
 }

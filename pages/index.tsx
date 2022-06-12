@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { AiOutlineMenu } from 'react-icons/ai';
 import { ClassicScoreBoard } from '../components/ClassicScoreBoard';
 import { NewScoreBoard } from '../components/NewScoreBoard';
 import { Header } from '../components/Header';
@@ -9,6 +10,11 @@ import { mediaQuery } from '../constants/mediaQuery';
 import { DXScoreBoard } from '../components/DXScoreBoard';
 import { TabNavigation } from '../components/TabNavigation';
 import { useRouter } from 'next/router';
+import { MenuBar } from '../components/MenuBar';
+import { useModal } from '../hooks/useModal';
+import { MenuBarWrapper } from '../components/MenuBar';
+import { Overlay } from '../components/utils/Overlay';
+import { MenuLinks } from '../constants/link';
 
 const TableWrapper = styled.div`
   width: 100%;
@@ -36,10 +42,18 @@ const MainView = styled.div`
   padding-bottom: 20px;
 `;
 
+const MenuButton = styled.div`
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  right: 20px;
+`;
+
 const Home = () => {
   const router = useRouter();
   const { scoreData, setScoreData, editScoreData, classicScore, newScore, DXScore } = useScore();
   const [mode, setMode] = useState('Classic');
+  const { isOpen, setIsOpen } = useModal();
 
   useEffect(() => {
     try {
@@ -76,7 +90,14 @@ const Home = () => {
         <TableWrapper>
           <Table scoreData={scoreData} onChange={editScoreData} />
         </TableWrapper>
+        <MenuBarWrapper isOpen={isOpen}>
+          <MenuBar links={MenuLinks} onClose={() => setIsOpen(false)} />
+        </MenuBarWrapper>
+        <Overlay onClick={() => setIsOpen(false)} isOpen={isOpen} />
       </MainView>
+      <MenuButton onClick={() => setIsOpen(true)}>
+        <AiOutlineMenu size="40" color="white" />
+      </MenuButton>
     </div>
   );
 };
