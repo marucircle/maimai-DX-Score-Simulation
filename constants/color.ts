@@ -15,4 +15,5 @@ export const ClassicScoreColor = {
 
 export const BaseColor = {
   white: '#fefefe',
+  blue: '#4850b9',
 };
