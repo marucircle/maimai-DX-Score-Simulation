@@ -29,18 +29,6 @@ const Tab = styled.div<{ isActive: boolean }>`
   cursor: pointer;
   text-align: center;
 
-  //   &:not(&:last-child) {
-  //     &::after {
-  //       content: '';
-  //       position: absolute;
-  //       right: 0;
-  //       background-color: #555;
-  //       width: 2px;
-  //       height: 100%;
-  //       top: 0px;
-  //     }
-  //   }
-
   @media screen and (min-width: ${mediaQuery['tb'].min}) {
     ${({ isActive }) =>
       isActive &&
