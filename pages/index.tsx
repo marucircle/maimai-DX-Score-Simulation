@@ -53,7 +53,10 @@ const Home = () => {
   const { scoreData, setScoreData, editScoreData, classicScore, newScore, DXScore } = useScore();
   const [mode, setMode] = useState('Classic');
   const { isOpen, setIsOpen } = useModal();
-  const MenuLinks = [{ path: '/', text: 'メインページ' }];
+  const MenuLinks = [
+    { path: '/', text: 'メインページ' },
+    { path: '/tutorial', text: '使い方' },
+  ];
 
   useEffect(() => {
     try {

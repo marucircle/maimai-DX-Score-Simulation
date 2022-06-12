@@ -4,6 +4,7 @@ import { SiTwitter, SiGithub } from 'react-icons/si';
 import { GrClose } from 'react-icons/gr';
 import { BaseColor } from '../constants/color';
 import { fontSize } from '../constants/font';
+import { useRouter } from 'next/router';
 
 export type MenuBarLink = {
   text: string;
@@ -70,6 +71,7 @@ const BottomLinks = styled.div`
 `;
 
 export const MenuBar = ({ links, onClose }: MenuBarProps) => {
+  const router = useRouter();
   return (
     <StyledMenuBar>
       <CloseButton onClick={onClose}>
@@ -78,7 +80,16 @@ export const MenuBar = ({ links, onClose }: MenuBarProps) => {
       <LinkFlex>
         <MenuBarLinks>
           {links.map((link) => {
-            return <MenuBarLink key={link.text + link.path}>{link.text}</MenuBarLink>;
+            return (
+              <MenuBarLink
+                key={link.text + link.path}
+                onClick={() => {
+                  router.push(link.path);
+                }}
+              >
+                {link.text}
+              </MenuBarLink>
+            );
           })}
         </MenuBarLinks>
         <BottomLinks>
